@@ -42,6 +42,6 @@ public class KidAttack : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
             other.gameObject.GetComponent<Demon>().TriggerKnockedBack();
         }
-        print(other.name);
     }
+
 }
