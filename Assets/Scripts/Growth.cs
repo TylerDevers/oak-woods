@@ -14,7 +14,12 @@ public class Growth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")) {
-            animator.Play("GrowthPickedUp");
+            PlayerMovement player = other.GetComponentInParent<PlayerMovement>();
+
+            if (player != null) {
+                animator.Play("GrowthPickedUp");
+                player.Growth();
+            }
         }
     }
 

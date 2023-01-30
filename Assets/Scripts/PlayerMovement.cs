@@ -11,12 +11,18 @@ public class PlayerMovement : MonoBehaviour
     new Rigidbody2D rigidbody;
     SpriteRenderer spriteRenderer;
     PlayerAnimation playerAnimation;
+    GameObject kid;
+    [SerializeField] GameObject adult;
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimation = FindObjectOfType<PlayerAnimation>();
+        kid = GameObject.Find("Kid");
+        // adult = GameObject.Find("Adult");
+
     }
+
 
     private void Update() {
         inputAxis = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -59,4 +65,23 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
         } 
     }
+
+    public void Growth() {
+
+        if (kid.activeSelf) { 
+            rigidbody.isKinematic = true;
+            kid.SetActive(false);
+            adult.SetActive(true);
+            rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            
+        }
+    }
+
+
+
+
+
+
+
+
 }

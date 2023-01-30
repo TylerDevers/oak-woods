@@ -319,6 +319,7 @@ MonoBehaviour:
   inputAxis: {x: 0, y: 0}
   jumpPressed: 0
   isGrounded: 0
+  adult: {fileID: 3184471004643095098}
 --- !u!50 &146793725
 Rigidbody2D:
   serializedVersion: 4
@@ -2379,7 +2380,7 @@ GameObject:
   - component: {fileID: 3184471004643095101}
   - component: {fileID: 3184471004643095105}
   - component: {fileID: 3184471004643095106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Adult
   m_TagString: Untagged
   m_Icon: {fileID: 0}

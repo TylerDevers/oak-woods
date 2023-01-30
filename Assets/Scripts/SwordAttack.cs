@@ -41,7 +41,6 @@ public class SwordAttack : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
             other.gameObject.GetComponent<Demon>().RunAway();
         }
-        print(other.name);
     }
 
 
