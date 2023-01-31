@@ -58,7 +58,8 @@ public class Demon : MonoBehaviour
 
         if (runAway) {
             rigidbody.velocity = new Vector2( awayFromPlayer * speed * Time.deltaTime, rigidbody.velocity.y);
-            animator.Play("DemonDefeat");
+            animator.Play("DemonDefeat");  
+            StartCoroutine(nameof(DestroyThis)); 
         } else if (playerClose) {
             animator.Play("DemonRun");
             rigidbody.position = Vector2.MoveTowards(transform.position, player.position, 0.1f * Time.deltaTime);
@@ -96,10 +97,10 @@ public class Demon : MonoBehaviour
 
     }
 
-    private void OnBecameInvisible() {
-        if (runAway) {
-            Destroy(gameObject);
-        }
+    IEnumerator DestroyThis() {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+        
     }
 
 }
