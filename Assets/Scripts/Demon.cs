@@ -12,7 +12,7 @@ public class Demon : MonoBehaviour
     Animator animator;
     private bool playerClose, runAway, knockedBack;
     float distance, awayFromPlayer;
-    float speed = 20f;
+    float speed = 30f;
 
 
     void Start()
@@ -70,11 +70,15 @@ public class Demon : MonoBehaviour
     }
 
     public void RunAway() {
-        awayFromPlayer = -Mathf.Sign(distance);
+        awayFromPlayer = -Mathf.Sign(player.position.x - transform.position.x);
         braveBody.enabled = false;
         cowardsBody.enabled = true;
         runAway = true;
-        gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        if (gameObject.GetComponent<SpriteRenderer>().flipX == false) {
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        } else {
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
 
     }
 

@@ -5,21 +5,19 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public Vector2 inputAxis;
+    public Vector2 inputAxis; 
+    Vector2 reversePosition, originalPosition;
     float moveSpeed = 50f, jumpForce = 150f;
     public bool jumpPressed, isGrounded;
     new Rigidbody2D rigidbody;
-    SpriteRenderer spriteRenderer;
     PlayerAnimation playerAnimation;
     GameObject kid;
     [SerializeField] GameObject adult;
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimation = FindObjectOfType<PlayerAnimation>();
         kid = GameObject.Find("Kid");
-        // adult = GameObject.Find("Adult");
 
     }
 
@@ -33,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonUp("Jump")) {
             jumpPressed = false;
         }
+
 
     }
 
@@ -77,10 +76,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-
-
-
+   
 
 
 
