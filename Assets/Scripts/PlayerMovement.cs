@@ -41,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
 
         HorizontalMovement();
         if (jumpPressed) { Jump(); } 
-        // if (!jumpPressed) { CutJumpShort(); }
         
     }
 
@@ -71,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
             rigidbody.isKinematic = true;
             kid.SetActive(false);
             adult.SetActive(true);
+            jumpForce = 200f;
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
             
         }
