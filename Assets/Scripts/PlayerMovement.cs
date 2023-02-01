@@ -76,6 +76,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void Shrink() {
+
+        if (adult.activeSelf) { 
+            rigidbody.isKinematic = true;
+            adult.SetActive(false);
+            kid.SetActive(true);
+            jumpForce = 150f;
+            rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            
+        }
+    }
+
    
 
 
