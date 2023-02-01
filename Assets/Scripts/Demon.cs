@@ -12,7 +12,7 @@ public class Demon : MonoBehaviour
     Animator animator;
     private bool playerClose, runAway, knockedBack;
     float distance, awayFromPlayer;
-    float speed = 30f;
+    float speed = 40f;
 
 
     void Start()
@@ -59,7 +59,6 @@ public class Demon : MonoBehaviour
         if (runAway) {
             rigidbody.velocity = new Vector2( awayFromPlayer * speed * Time.deltaTime, rigidbody.velocity.y);
             animator.Play("DemonDefeat");  
-            StartCoroutine(nameof(DestroyThis)); 
         } else if (playerClose) {
             animator.Play("DemonRun");
             rigidbody.position = Vector2.MoveTowards(transform.position, player.position, 0.1f * Time.deltaTime);
@@ -72,9 +71,12 @@ public class Demon : MonoBehaviour
 
     public void RunAway() {
         awayFromPlayer = -Mathf.Sign(player.position.x - transform.position.x);
+        
         braveBody.enabled = false;
-        cowardsBody.enabled = true;
         runAway = true;
+        rigidbody.isKinematic = true;
+
+        transform.position = new Vector2(transform.position.x, -0.369f); // correct coward sprites position.
         if (gameObject.GetComponent<SpriteRenderer>().flipX == false) {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         } else {
@@ -97,8 +99,9 @@ public class Demon : MonoBehaviour
 
     }
 
-    IEnumerator DestroyThis() {
-        yield return new WaitForSeconds(2f);
+    void OnBecameInvisible()  {
+        if (!runAway) { return; }
+
         Destroy(gameObject);
         
     }
