@@ -24,7 +24,7 @@ public class PlayerAnimation : MonoBehaviour
 
         if (isAttacking) { return; }
 
-        if (player.inputAxis == Vector2.zero && player.isGrounded) {
+        if (player.inputAxis.x == 0 && player.isGrounded) {
             // animator.SetBool("Run", false);
             animator.Play("Idle");
         }
@@ -54,13 +54,6 @@ public class PlayerAnimation : MonoBehaviour
     public void AttackFinished() {
         isAttacking = false;
     }
-
-
-// if (Input.GetButtonDown("Fire1")) {
-//             sword.enabled = true;
-//             swingingSword = true;
-//             animator.SetTrigger("Attack");
-//         }
 
 
 

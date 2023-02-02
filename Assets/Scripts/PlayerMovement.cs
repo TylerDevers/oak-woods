@@ -25,13 +25,9 @@ public class PlayerMovement : MonoBehaviour
     private void Update() {
         inputAxis = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump") && !jumpPressed) {
             jumpPressed = true;
         }
-        if (Input.GetButtonUp("Jump")) {
-            jumpPressed = false;
-        }
-
 
     }
 
@@ -44,11 +40,14 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    // for feet
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) {
             isGrounded = true;
+            jumpPressed = false;
         }
     }
+
 
     void HorizontalMovement() {
 
@@ -87,9 +86,6 @@ public class PlayerMovement : MonoBehaviour
             
         }
     }
-
-   
-
 
 
 }

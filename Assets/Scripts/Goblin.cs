@@ -5,15 +5,17 @@ using UnityEngine;
 public class Goblin : MonoBehaviour
 {
     new Rigidbody2D rigidbody;
+    new Collider2D collider;
     Transform player;
     Animator animator;
-    private bool playerClose;
+    private bool playerClose, dead;
     float distance, awayFromPlayer;
-
+    [SerializeField] float runSpeed = 0.2f, attackDistance = 2f;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        collider = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
         player = GameObject.Find("Player").transform;
          
@@ -31,7 +33,7 @@ public class Goblin : MonoBehaviour
 
         // player within distance, enemy attacks
         distance = Vector2.Distance(player.position, transform.position);
-        if (distance < 3f) {
+        if (distance < attackDistance) {
             playerClose = true;
         } else {
             playerClose = false;
@@ -48,7 +50,7 @@ public class Goblin : MonoBehaviour
 
         if (playerClose) {
             animator.Play("Run");
-            rigidbody.position = Vector2.MoveTowards(transform.position, player.position, 0.1f * Time.deltaTime);
+            rigidbody.position = Vector2.MoveTowards(transform.position, player.position, runSpeed * Time.fixedDeltaTime);
         } else {
             rigidbody.position = rigidbody.position;
             animator.Play("Idle");
@@ -57,8 +59,30 @@ public class Goblin : MonoBehaviour
     }
 
 
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.collider.tag == "Headbutt") {
+            Damage(other.collider.tag);
+        } else if (other.collider.tag == "Sword") {
+            Damage(other.collider.tag);
+        } else if (other.collider.tag == "Player") {
+            print(other.collider.name + " 3");
+        }
+    }
 
+    void Damage(string hitBy) {
+        float knockBackDirection = -Mathf.Sign(player.position.x - transform.position.x);
+        rigidbody.velocity += new Vector2 (knockBackDirection, 2f);
+        if (hitBy == "Sword") {
+            rigidbody.isKinematic = true;
+            rigidbody.constraints = RigidbodyConstraints2D.None;
+        }
+        collider.enabled = false;
+        GetComponent<SpriteRenderer>().sortingOrder = 20;
+        dead = true;
+
+    }
     void OnBecameInvisible()  {
+        if (!dead) { return; }
 
         Destroy(gameObject);
     }

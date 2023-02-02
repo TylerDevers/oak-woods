@@ -57,11 +57,11 @@ public class Demon : MonoBehaviour
         if (knockedBack) { return; }
 
         if (runAway) {
-            rigidbody.velocity = new Vector2( awayFromPlayer * speed * Time.deltaTime, rigidbody.velocity.y);
+            rigidbody.velocity = new Vector2( awayFromPlayer * speed * Time.fixedDeltaTime, rigidbody.velocity.y);
             animator.Play("DemonDefeat");  
         } else if (playerClose) {
             animator.Play("DemonRun");
-            rigidbody.position = Vector2.MoveTowards(transform.position, player.position, 0.1f * Time.deltaTime);
+            rigidbody.position = Vector2.MoveTowards(transform.position, player.position, 0.1f * Time.fixedDeltaTime);
         } else {
             rigidbody.position = rigidbody.position;
             animator.Play("DemonIdle");
