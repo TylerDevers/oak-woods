@@ -13,14 +13,27 @@ public class PlayerMovement : MonoBehaviour
     PlayerAnimation playerAnimation;
     GameObject kid;
     [SerializeField] GameObject adult;
+    GameSession gameSession;
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
         playerAnimation = FindObjectOfType<PlayerAnimation>();
         kid = GameObject.Find("Kid");
-
+        gameSession = FindObjectOfType<GameSession>();
     }
 
+    private void Start() {
+        if (gameSession.isKid) {
+            print(gameSession.isKid + " isKid");
+            adult.SetActive(false);
+            kid.SetActive(true);
+            jumpForce = 150f;
+        } else {
+            kid.SetActive(false);
+            adult.SetActive(true);
+            jumpForce = 200f;
+        }
+    }
 
     private void Update() {
         inputAxis = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -71,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
             adult.SetActive(true);
             jumpForce = 200f;
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
-            
+            gameSession.isKid = false;
         }
     }
 
@@ -83,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
             kid.SetActive(true);
             jumpForce = 150f;
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
-            
+            gameSession.isKid = true;
         }
     }
 
