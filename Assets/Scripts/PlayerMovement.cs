@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     GameObject kid;
     [SerializeField] GameObject adult;
     GameSession gameSession;
+    int gameSessionCheck = 0;
+
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -23,19 +25,25 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Start() {
-        if (gameSession.isKid) {
-            print(gameSession.isKid + " isKid");
-            adult.SetActive(false);
-            kid.SetActive(true);
-            jumpForce = 150f;
-        } else {
-            kid.SetActive(false);
-            adult.SetActive(true);
-            jumpForce = 200f;
-        }
+        
     }
 
     private void Update() {
+
+        if (gameSessionCheck < 1) {
+            if (gameSession.IsKid) {
+            print(gameSession.IsKid + " isKid");
+            adult.SetActive(false);
+            kid.SetActive(true);
+            jumpForce = 150f;
+            } else {
+                kid.SetActive(false);
+                adult.SetActive(true);
+                jumpForce = 200f;
+            }
+            gameSessionCheck++;
+        }
+
         inputAxis = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         if (Input.GetButtonDown("Jump") && !jumpPressed) {
@@ -84,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
             adult.SetActive(true);
             jumpForce = 200f;
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
-            gameSession.isKid = false;
+            gameSession.IsKid = false;
         }
     }
 
@@ -96,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             kid.SetActive(true);
             jumpForce = 150f;
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
-            gameSession.isKid = true;
+            gameSession.IsKid = true;
         }
     }
 
