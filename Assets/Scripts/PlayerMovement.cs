@@ -13,36 +13,37 @@ public class PlayerMovement : MonoBehaviour
     PlayerAnimation playerAnimation;
     GameObject kid;
     [SerializeField] GameObject adult;
-    GameSession gameSession;
-    int gameSessionCheck = 0;
 
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody2D>();
         playerAnimation = FindObjectOfType<PlayerAnimation>();
         kid = GameObject.Find("Kid");
-        gameSession = FindObjectOfType<GameSession>();
     }
 
-    private void Start() {
-        
+    private void Start()
+    {
+        PlayerState();
+    }
+
+    private void PlayerState()
+    {
+        print($"start, isKid is {GameSession.instance.IsKid}");
+        if (GameSession.instance.IsKid)
+        {
+            adult.SetActive(false);
+            kid.SetActive(true);
+            jumpForce = 175f;
+        }
+        else if (!GameSession.instance.IsKid)
+        {
+            kid.SetActive(false);
+            adult.SetActive(true);
+            jumpForce = 200f;
+        }
     }
 
     private void Update() {
-
-        if (gameSessionCheck < 1) {
-            if (gameSession.IsKid) {
-            print(gameSession.IsKid + " isKid");
-            adult.SetActive(false);
-            kid.SetActive(true);
-            jumpForce = 150f;
-            } else {
-                kid.SetActive(false);
-                adult.SetActive(true);
-                jumpForce = 200f;
-            }
-            gameSessionCheck++;
-        }
 
         inputAxis = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
@@ -92,7 +93,9 @@ public class PlayerMovement : MonoBehaviour
             adult.SetActive(true);
             jumpForce = 200f;
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
-            gameSession.IsKid = false;
+            // gameSession.IsKid = false;
+            GameSession.instance.IsKid = false;
+            print("inside growth: isKid = " + GameSession.instance.IsKid);
         }
     }
 
@@ -102,9 +105,10 @@ public class PlayerMovement : MonoBehaviour
             rigidbody.isKinematic = true;
             adult.SetActive(false);
             kid.SetActive(true);
-            jumpForce = 150f;
+            jumpForce = 175f;
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
-            gameSession.IsKid = true;
+            GameSession.instance.IsKid = true;
+            print("inside growth: isKid = " + GameSession.instance.IsKid);
         }
     }
 
