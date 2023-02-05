@@ -8,6 +8,7 @@ public class GameSession : MonoBehaviour
 {
 
     public static GameSession instance;
+    int lives = 3;
     private bool isKid = true;
     public bool IsKid 
     { 
@@ -32,7 +33,10 @@ public class GameSession : MonoBehaviour
    }
 
 
-
+    public void RestartLevel() {
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentLevel);
+    }
   
    
 

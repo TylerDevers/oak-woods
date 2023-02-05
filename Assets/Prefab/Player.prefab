@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 6730758806401003769}
   - component: {fileID: 6730758806401003653}
   - component: {fileID: 6730758806401003654}
+  - component: {fileID: 1644533948}
   m_Layer: 8
   m_Name: Adult
   m_TagString: Player
@@ -219,6 +220,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ed2aa7613a04fc40a88ed614c8cc67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1644533948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730758806401003774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a63a6a940c578d4bb5c9ed2d9edc618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6730758806758849625
@@ -436,7 +449,7 @@ GameObject:
   - component: {fileID: 8167830947242833740}
   - component: {fileID: 8167830947242833742}
   - component: {fileID: 8167830947242833743}
-  - component: {fileID: 8167830947242833736}
+  - component: {fileID: 458694875}
   m_Layer: 8
   m_Name: Kid
   m_TagString: Player
@@ -561,15 +574,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
---- !u!114 &8167830947242833736
+--- !u!114 &458694875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8167830947242833730}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a69cbce26b08974c80d87cbd8384b5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a63a6a940c578d4bb5c9ed2d9edc618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

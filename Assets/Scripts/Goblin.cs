@@ -65,7 +65,14 @@ public class Goblin : MonoBehaviour
         } else if (other.collider.tag == "Sword") {
             Damage(other.collider.tag);
         } else if (other.collider.tag == "Player") {
-            print(other.collider.name + " 3");
+            if (!GameSession.instance.IsKid) {
+                // float knockBackDirection = -Mathf.Sign(player.position.x - transform.position.x);
+                // other.gameObject.GetComponent<Rigidbody2D>().velocity += Vector2.right * 5f;
+                // other.gameObject.GetComponent<PlayerMovement>().BecomeChild();
+            } else {
+                // other.gameObject.GetComponent<PlayerMovement>().BecomeChild();
+                // GameSession.instance.RestartLevel();
+            }
         }
     }
 

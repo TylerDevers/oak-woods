@@ -38,10 +38,8 @@ public class SwordAttack : MonoBehaviour
         }
     }
     private void OnCollisionEnter2D(Collision2D other) {
-        print("headbutt " + LayerMask.LayerToName(other.gameObject.layer));
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
+        if (other.gameObject.tag == "Demon") {
             other.gameObject.GetComponent<Demon>().RunAway();
-            print("Sword hit");
         }
     }
 

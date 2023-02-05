@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6481265959237929059}
   - component: {fileID: 6481265959237929058}
   - component: {fileID: 6481265959237929057}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Goblin
-  m_TagString: Untagged
+  m_TagString: Goblin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,3 +158,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 0.2
+  attackDistance: 2

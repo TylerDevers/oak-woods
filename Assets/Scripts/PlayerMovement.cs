@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
+    
     void HorizontalMovement() {
 
         rigidbody.velocity = new Vector2(inputAxis.x * moveSpeed * Time.deltaTime, rigidbody.velocity.y);
@@ -109,5 +109,23 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void BecomeChild() {
+        // rigidbody.isKinematic = true;
+        adult.SetActive(false);
+        kid.SetActive(true);
+        jumpForce = 175f;
+        // rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        GameSession.instance.IsKid = true;
+    }
+
+    public void BecomeAdult() {
+        // rigidbody.isKinematic = true;
+        kid.SetActive(false);
+        adult.SetActive(true);
+        jumpForce = 200f;
+        // rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        // gameSession.IsKid = false;
+        GameSession.instance.IsKid = false;
+    }
 
 }
