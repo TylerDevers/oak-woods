@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Headbutt
   - Sword
+  - Enemy
   layers:
   - Default
   - TransparentFX

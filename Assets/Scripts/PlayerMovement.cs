@@ -28,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerState()
     {
-        print($"start, isKid is {GameSession.instance.IsKid}");
         if (GameSession.instance.IsKid)
         {
             adult.SetActive(false);
@@ -95,7 +94,6 @@ public class PlayerMovement : MonoBehaviour
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
             // gameSession.IsKid = false;
             GameSession.instance.IsKid = false;
-            print("inside growth: isKid = " + GameSession.instance.IsKid);
         }
     }
 
@@ -108,7 +106,6 @@ public class PlayerMovement : MonoBehaviour
             jumpForce = 175f;
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
             GameSession.instance.IsKid = true;
-            print("inside growth: isKid = " + GameSession.instance.IsKid);
         }
     }
 

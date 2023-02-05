@@ -38,7 +38,8 @@ public class KidAttack : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnCollisionEnter2D(Collision2D other) {
+        print("headbutt " + LayerMask.LayerToName(other.gameObject.layer));
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
             other.gameObject.GetComponent<Demon>().TriggerKnockedBack();
         }

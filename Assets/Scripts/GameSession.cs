@@ -21,13 +21,6 @@ public class GameSession : MonoBehaviour
 
 
    private void Awake() {
-    // int gamesessions = FindObjectsOfType<GameSession>().Length;
-
-    // if (gamesessions > 1) {
-    //     Destroy(gameObject);
-    // } else {
-    //     DontDestroyOnLoad(gameObject);
-    // }
 
     if (instance != null && instance != this) {
             Destroy(gameObject);
