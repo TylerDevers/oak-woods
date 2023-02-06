@@ -39,5 +39,7 @@ public class GameSession : MonoBehaviour
     }
   
    
-
+    public void StartGame() {
+        SceneManager.LoadScene(1);
+    }
 }
