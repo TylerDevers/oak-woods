@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Goblin
   - Demon
+  - Rock
   layers:
   - Default
   - TransparentFX

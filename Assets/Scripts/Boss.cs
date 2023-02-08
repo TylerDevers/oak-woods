@@ -52,6 +52,7 @@ public class Boss : MonoBehaviour
     }
 
     void Attack() {
+        if (dead) { return; }
 
         if (playerClose) {
             animator.Play("Run");
@@ -65,6 +66,11 @@ public class Boss : MonoBehaviour
 
 
     private void OnCollisionEnter2D(Collision2D other) {
+         if (other.collider.tag == "Rock") {
+            Damage(other.collider.tag);
+            Debug.Log("Rock");
+        }
+
         if (other.collider.tag == "Headbutt") {
             Damage(other.collider.tag);
         } else if (other.collider.tag == "Sword") {
@@ -79,7 +85,14 @@ public class Boss : MonoBehaviour
 
     void Damage(string hitBy) {
         float knockBackDirection = -Mathf.Sign(player.position.x - transform.position.x);
-        if (hitBy == "Headbutt") {
+        if (hitBy == "Rock") {
+            dead = true;
+            animator.Play("Death");
+            spriteRenderer.color = Color.red;
+            rigidbody.constraints = RigidbodyConstraints2D.None;
+            collider.enabled = false;
+            // rigidbody.velocity += new Vector2 (knockBackDirection, 2f);
+        } else if (hitBy == "Headbutt") {
             rigidbody.velocity += new Vector2 (knockBackDirection, 2f);
         } else if (hitBy == "Sword") {
             rigidbody.velocity += new Vector2 (knockBackDirection, 2f);
