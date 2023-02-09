@@ -12,6 +12,7 @@ public class Boss : MonoBehaviour
     Animator animator;
     private bool playerClose, dead;
     float distance, awayFromPlayer;
+    int health = 10;
     [SerializeField] float runSpeed = 0.5f, attackDistance = 2f;
     Color bossStartingColor;
 
@@ -68,13 +69,16 @@ public class Boss : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
          if (other.collider.tag == "Rock") {
             Damage(other.collider.tag);
-            Debug.Log("Rock");
+            health -= 3;
+            Death();
         }
 
         if (other.collider.tag == "Headbutt") {
             Damage(other.collider.tag);
         } else if (other.collider.tag == "Sword") {
             Damage(other.collider.tag);
+            health--;
+            Death();
         } else if (other.collider.tag == "Player") {
             if (!GameSession.instance.IsKid) {
 
@@ -86,11 +90,7 @@ public class Boss : MonoBehaviour
     void Damage(string hitBy) {
         float knockBackDirection = -Mathf.Sign(player.position.x - transform.position.x);
         if (hitBy == "Rock") {
-            dead = true;
-            animator.Play("Death");
-            spriteRenderer.color = Color.red;
-            rigidbody.constraints = RigidbodyConstraints2D.None;
-            collider.enabled = false;
+            
             // rigidbody.velocity += new Vector2 (knockBackDirection, 2f);
         } else if (hitBy == "Headbutt") {
             rigidbody.velocity += new Vector2 (knockBackDirection, 2f);
@@ -99,6 +99,16 @@ public class Boss : MonoBehaviour
             StartCoroutine(nameof(ChangeColor));
         }
         
+    }
+
+    void Death() {
+        if (health <= 0) {
+            dead = true;
+            collider.enabled = false;
+            animator.Play("Death");
+            spriteRenderer.color = Color.red;
+            rigidbody.constraints = RigidbodyConstraints2D.None;
+        }
     }
 
     IEnumerator ChangeColor() {

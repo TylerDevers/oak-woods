@@ -52,6 +52,11 @@ public class Demon : MonoBehaviour
         Attack();
     }
 
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.tag == "Rock" ) {
+            RunAway();
+        }
+    }
     void Attack() {
 
         if (knockedBack) { return; }

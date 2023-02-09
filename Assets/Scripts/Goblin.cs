@@ -60,7 +60,7 @@ public class Goblin : MonoBehaviour
 
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.collider.tag == "Headbutt") {
+        if (other.collider.tag == "Headbutt" || other.collider.tag == "Rock" ) {
             Damage(other.collider.tag);
         } else if (other.collider.tag == "Sword") {
             Damage(other.collider.tag);
